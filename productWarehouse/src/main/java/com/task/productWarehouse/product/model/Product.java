@@ -118,12 +118,12 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(partNumber, product.partNumber) && Objects.equals(description, product.description) && Objects.equals(category, product.category) && Objects.equals(price, product.price) && Objects.equals(count, product.count) && Objects.equals(lastCountChange, product.lastCountChange) && Objects.equals(dateOfCreation, product.dateOfCreation);
+        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(partNumber, product.partNumber) && Objects.equals(description, product.description) && Objects.equals(category, product.category) && Objects.equals(price, product.price) && Objects.equals(count, product.count) && Objects.equals(lastCountChange.toLocalDate(), product.lastCountChange.toLocalDate()) && Objects.equals(dateOfCreation, product.dateOfCreation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, partNumber, description, category, price, count, lastCountChange, dateOfCreation);
+        return Objects.hash(id, name, partNumber, description, category, price, count, lastCountChange.toLocalDate(), dateOfCreation);
     }
 
     @Override

@@ -61,4 +61,8 @@ public class ProductService {
         productRepository.delete(currentProduct);
         return currentProduct;
     }
+    @Transactional
+    public void deleteAll(){
+        productRepository.deleteAll();
+    }
 }
