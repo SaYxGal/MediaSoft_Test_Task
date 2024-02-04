@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
-
+//Слой бизнес-логики
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
@@ -23,15 +23,18 @@ public class ProductService {
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
+    //Получение одного экземпляра по UUID
     @Transactional(readOnly = true)
     public Product findOne(UUID id){
         final Optional<Product> product = productRepository.findById(id);
         return product.orElseThrow(() -> new ProductNotFoundException(id));
     }
+    //Получение страницы товаров (пагинация)
     @Transactional(readOnly = true)
     public Page<Product> findAll(int page, int size){
         return productRepository.findAll(PageRequest.of(page - 1, size, Sort.by("id").descending()));
     }
+    //Создание товара
     @Transactional
     public Product createProduct(SaveProductDTO productDTO){
         final Product product = new Product(productDTO.getName(), productDTO.getPartNumber(),
@@ -41,6 +44,7 @@ public class ProductService {
         product.setDateOfCreation(LocalDate.now());
         return productRepository.save(product);
     }
+    //Обновление товара
     @Transactional
     public Product updateProduct(UUID id, SaveProductDTO updateProductDTO){
         final Product currentProduct = findOne(id);
@@ -55,12 +59,14 @@ public class ProductService {
         }
         return productRepository.save(currentProduct);
     }
+    //Удаление товара
     @Transactional
     public Product deleteProduct(UUID id){
         final Product currentProduct = findOne(id);
         productRepository.delete(currentProduct);
         return currentProduct;
     }
+    //Удаление всего товара (в контроллере не используется)
     @Transactional
     public void deleteAll(){
         productRepository.deleteAll();

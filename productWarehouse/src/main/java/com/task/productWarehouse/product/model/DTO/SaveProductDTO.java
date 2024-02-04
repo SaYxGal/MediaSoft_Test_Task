@@ -1,5 +1,6 @@
 package com.task.productWarehouse.product.model.DTO;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -13,8 +14,10 @@ public class SaveProductDTO {
     @NotBlank(message = "category is mandatory")
     private String category;
     @NotNull(message = "price is mandatory")
+    @Min(value = 1, message = "price must be greater or equal 1")
     private Double price;
     @NotNull(message = "count is mandatory")
+    @Min(value = 0, message = "count must be positive number or zero")
     private Integer count;
 
     public SaveProductDTO() {
