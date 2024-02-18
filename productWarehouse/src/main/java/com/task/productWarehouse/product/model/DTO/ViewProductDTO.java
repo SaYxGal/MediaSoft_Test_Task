@@ -6,6 +6,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+/**
+ * Класс, который используется в качестве возвращаемого значения в контроллере.
+ * Нужен для удобного скрытия, дополнения данных, содержащихся в сущности "Товар"
+ */
 public class ViewProductDTO {
     private final UUID id;
     private final String name;

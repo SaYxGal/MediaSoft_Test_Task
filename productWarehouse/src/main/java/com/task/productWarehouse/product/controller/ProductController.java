@@ -15,6 +15,10 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.UUID;
 
+/**
+ * Класс, представляющий собой контроллер. Методы данного класса представляют собой эндпоинты,
+ * к которым может обратиться пользователь API.
+ */
 @Tag(name = "Product", description = "Product management APIs")
 @RestController
 @RequestMapping("/api/products")
@@ -24,6 +28,10 @@ public class ProductController {
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
+
+    /**
+     * Получение одного товара
+     */
     @Operation(
             summary = "Retrieve a Product by UUID",
             description = "Get a Product object by specifying its UUID. The response is Product object with full information about it.")
@@ -31,6 +39,9 @@ public class ProductController {
     public ViewProductDTO read(@PathVariable UUID id){
         return new ViewProductDTO(productService.findOne(id));
     }
+    /**
+     * Получение страницы товаров по номеру и размеру страницы
+     */
     @Operation(
             summary = "Retrieve a page of Product objects",
             description = "Get a Product page by passing number of page and its size. The response is page of Product objects.")
@@ -49,6 +60,9 @@ public class ProductController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    /**
+     * Создание товара
+     */
     @Operation(
             summary = "Create a new Product object",
             description = "Create a Product object by passing SaveProductDTO schema. The response is created Product object.")
@@ -56,6 +70,9 @@ public class ProductController {
     public ViewProductDTO create(@Valid @RequestBody SaveProductDTO productDTO){
         return new ViewProductDTO(productService.createProduct(productDTO));
     }
+    /**
+     * Обновление товара
+     */
     @Operation(
             summary = "Update existing Product object",
             description = "Update a Product object by passing SaveProductDTO schema with new fields values and specifying its UUID. The response is updated Product object.")
@@ -63,6 +80,9 @@ public class ProductController {
     public ViewProductDTO update(@PathVariable UUID id, @Valid @RequestBody SaveProductDTO productDTO){
         return new ViewProductDTO(productService.updateProduct(id, productDTO));
     }
+    /**
+     * Удаление товара
+     */
     @Operation(
             summary = "Delete existing Product object",
             description = "Delete a Product object by specifying its UUID. The response is deleted Product object.")

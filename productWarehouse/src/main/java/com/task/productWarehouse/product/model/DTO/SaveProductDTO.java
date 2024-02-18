@@ -4,6 +4,10 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+/**
+ * Класс, который используется для сохранения или изменения товаров в контроллере.
+ * Присутствует валидация полей, реализованная соответствующими аннотациями.
+ */
 public class SaveProductDTO {
     @NotBlank(message = "name is mandatory")
     private String name;

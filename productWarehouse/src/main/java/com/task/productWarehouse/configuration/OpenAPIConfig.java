@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
+/**
+ * Класс, содержащий информацию, необходимую для генерации SwaggerUI
+ */
 @Configuration
 public class OpenAPIConfig {
     @Value("${openapi.url:http://localhost:8080}")

@@ -23,7 +23,11 @@ services:
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: user_password
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
-      SPRING_JPA_HIBERNATE_DDL-AUTO: update
+      SPRING_JPA_HIBERNATE_DDL-AUTO: validate
+      SPRING.FLYWAY.BASELINE-ON-MIGRATE: true
+      SPRING.FLYWAY.USER: user
+      SPRING.FLYWAY.PASSWORD: user_password
+      SPRING.FLYWAY.BASELINE-description: "init"
 
 volumes:
   data:

@@ -7,7 +7,10 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
-@Entity
+/**
+ * Класс, представляющий собой сущность "Товар". Именно на основании этого класса происходит создание таблицы в базе данных
+ */
+@Entity(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
