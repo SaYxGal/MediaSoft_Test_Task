@@ -11,23 +11,26 @@ services:
       - "5432:5432"
     volumes:
       - data:/var/lib/postgresql/data
-
+  flyway:
+    image: flyway/flyway:latest-alpine
+    volumes:
+      - ./productWarehouse/src/main/resources/db/migration/:/flyway/sql/
+    command: -url=jdbc:postgresql://postgres:5432/dockerdb -schemas=public -user=user -password=user_password -connectRetries=60 migrate
+    depends_on:
+      - postgres
   app:
     build: ./productWarehouse
     ports:
       - "8080:8080"
     depends_on:
       - postgres
+      - flyway
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/dockerdb
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: user_password
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
       SPRING_JPA_HIBERNATE_DDL-AUTO: validate
-      SPRING.FLYWAY.BASELINE-ON-MIGRATE: true
-      SPRING.FLYWAY.USER: user
-      SPRING.FLYWAY.PASSWORD: user_password
-      SPRING.FLYWAY.BASELINE-description: "init"
 
 volumes:
   data:

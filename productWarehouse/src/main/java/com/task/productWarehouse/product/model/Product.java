@@ -10,6 +10,7 @@ import java.util.UUID;
 /**
  * Класс, представляющий собой сущность "Товар". Именно на основании этого класса происходит создание таблицы в базе данных
  */
+@Table(name = "products")
 @Entity(name = "products")
 public class Product {
     @Id
