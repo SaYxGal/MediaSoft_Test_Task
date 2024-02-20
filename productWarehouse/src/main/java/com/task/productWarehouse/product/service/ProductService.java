@@ -4,6 +4,7 @@ import com.task.productWarehouse.product.model.DTO.SaveProductDTO;
 import com.task.productWarehouse.product.model.Product;
 import com.task.productWarehouse.product.repository.ProductRepository;
 import com.task.productWarehouse.product.service.exception.ProductNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -21,12 +22,9 @@ import java.util.UUID;
  * Класс, содержащий методы, реализующие бизнес-логику приложения по работе с товарами
  */
 @Service
+@RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
-
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 
     /**
      * @param id Уникальный идентификатор товара формата UUID
@@ -58,8 +56,6 @@ public class ProductService {
         final Product product = new Product(productDTO.getName(), productDTO.getPartNumber(),
                 productDTO.getDescription(), productDTO.getCategory(), productDTO.getPrice(),
                 productDTO.getCount());
-        product.setLastCountChange(LocalDateTime.now());
-        product.setDateOfCreation(LocalDate.now());
         return productRepository.save(product);
     }
 
