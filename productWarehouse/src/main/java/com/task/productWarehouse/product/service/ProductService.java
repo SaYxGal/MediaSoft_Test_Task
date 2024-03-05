@@ -21,9 +21,9 @@ import java.util.UUID;
 /**
  * Класс, содержащий методы, реализующие бизнес-логику приложения по работе с товарами
  */
-@Service
+@Service("dbRealisation")
 @RequiredArgsConstructor
-public class ProductService {
+public class ProductService implements IProductService {
     private final ProductRepository productRepository;
 
     /**

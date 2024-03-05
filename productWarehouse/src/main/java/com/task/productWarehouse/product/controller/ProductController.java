@@ -2,11 +2,14 @@ package com.task.productWarehouse.product.controller;
 
 import com.task.productWarehouse.product.model.DTO.SaveProductDTO;
 import com.task.productWarehouse.product.model.DTO.ViewProductDTO;
+import com.task.productWarehouse.product.service.IProductService;
 import com.task.productWarehouse.product.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +28,9 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
-    private final ProductService productService;
+    @Autowired
+    @Qualifier("dbRealisation")
+    private final IProductService productService;
 
     /**
      * Получение одного товара
